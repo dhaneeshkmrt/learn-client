@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
 
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -12,12 +13,18 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 import { UserService } from './services/user.service';
+import { NotesComponent } from './components/notes/notes.component';
+import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ContactmanagerAppComponent,
     children: [
+      {
+        path: ':id',
+        component: MainContentComponent
+      },
       {
         path: '',
         component: MainContentComponent
@@ -31,12 +38,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent],
+  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, NotesComponent, NewContactDialogComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FlexLayoutModule,
     MaterialModule
   ],
